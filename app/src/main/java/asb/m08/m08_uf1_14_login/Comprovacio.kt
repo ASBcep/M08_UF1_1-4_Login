@@ -1,7 +1,10 @@
 package asb.m08.m08_uf1_14_login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 /*
@@ -19,17 +22,41 @@ class Comprovacio: AppCompatActivity()
 {
     object loginConstants
     {
-        const val USERNAME = "userName"
-        const val PASSWORD = "passWord"
-        const val NOMCOMPLERT = "nomComplert"
+        //const val USERNAME = "userName"
+        //const val PASSWORD = "passWord"
+        const val USUARI = "usuariConstant"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.comprovacio)
 
+        val intent = getIntent()
+        val usuari = intent.getSerializableExtra(loginConstants.USUARI) as Usuari
+
+        val edTxtNomSencer = this.findViewById<EditText>(R.id.EdTxtNomSencer)
         val btnComprovar = this.findViewById<Button>(R.id.BtnComprovar)
-        btnComprovar.setOnClickListener(
+
+        val nomSencer = edTxtNomSencer.text.toString()
+
+        btnComprovar.setOnClickListener()
+        {
             //comprovar si el text escrit coincideix
-        )
+            if (edTxtNomSencer.text.toString() == usuari.nomSencer)
+            {
+                Toast.makeText(this, "Nom correcte", Toast.LENGTH_SHORT).show()
+                //tancar activity retornant un resultat
+                setResult(RESULT_OK)
+                //tancar activity
+                //finish()
+            } else {
+                Toast.makeText(this, "Nom incorrecte", Toast.LENGTH_SHORT).show()
+                //tancar activity sense retornar cap resultat
+                setResult(RESULT_CANCELED)
+                //tancar activity
+                //finish()
+            }
+            //tancar activity
+            finish()
+        }
     }
 }

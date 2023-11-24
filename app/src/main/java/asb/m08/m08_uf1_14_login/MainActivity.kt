@@ -10,74 +10,66 @@ dades no sigui correcta, retornarem RESULT_CANCEL i mostrarem el missatge “Usu
 incorrectes”. Lliurarem l’aplicació comprimida junt amb el full de treball.
 */
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
-    /*
+
         private val getResult =
             registerForActivityResult(
                 ActivityResultContracts.StartActivityForResult())
             {
-                val EdTxtNomSencer = findViewById(R.id.EdTxtNomSencer) as TextView
+                val txtVwAnunci = findViewById(R.id.TxtVwAnunci) as TextView
                 if(it.resultCode == RESULT_OK) {
                     //retornar un string
-                    val nomComplert = it.data?.getStringExtra(Comprovacio.loginConstants.NOMCOMPLERT)
+                    //val nomComplet = it.data?.getStringExtra(Comprovacio.loginConstants.USUARI)
                     /*retornar un objecte
                     val satellite = it.data?.getSerializableExtra()
                     */
 
-                    EdTxtNomSencer.text = "Usuari i contrasenya correctes, " + nomComplert
+                    txtVwAnunci.text = "Usuari i contrasenya correctes"
                 }else if (it.resultCode == RESULT_CANCELED){ //opcional, si no restorna RESULT_OK hauria de donar RESULT_CANCELLED
-                    EdTxtNomSencer.text = "error1" //canviar a "Usuari i/o contrasenya incorrectes"
+                    txtVwAnunci.text = "Usuari i/o contrasenya incorrectes"
                 }else { //menys codi que amb else if
-                    EdTxtNomSencer.text = "error2" //canviar a "Usuari i/o contrasenya incorrectes"
+                    txtVwAnunci.text = "Usuari i/o contrasenya incorrectes"
                 }
             }
-    */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val usuaris = getUsuaris()
-        val usuari = Usuari("cep", "informatica","Alex Saborit Bolea")
-        val edTxtUsername = this.findViewById(R.id.EdTxtUsername) as EditText
-        val edTxtPassword = this.findViewById(R.id.EdTxtPassword) as EditText
+        val usuari = Usuari("cep", "informatica", "Alex Saborit Bolea")
+        val edTxtUsername = findViewById<EditText>(R.id.EdTxtUsername)
+        val edTxtPassword = findViewById<EditText>(R.id.EdTxtPassword)
+        val btnOk = findViewById<Button>(R.id.BtnLogin)
 
-        val btnOk = this.findViewById(R.id.BtnLogin) as Button
+        btnOk.setOnClickListener {
+            val username = edTxtUsername.text.toString()
+            val password = edTxtPassword.text.toString()
 
-        val username = edTxtUsername.text
-        val password = edTxtPassword.text
-
-        if (username = usuari.username.toString(){
-
+            if (username == usuari.username && password == usuari.password) {
+                // Credencials correctes, obre la segona activitat o fes alguna altra acció
+                Toast.makeText(this, "Credencials correctes", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Comprovacio::class.java)
+                intent. putExtra(Comprovacio.loginConstants.USUARI, usuari)
+                //startActivity(intent)
+                getResult.launch(intent)
+            } else {
+                // Les credencials no són correctes, mostra un missatge d'error
+                Toast.makeText(this, "Credencials incorrectes", Toast.LENGTH_SHORT).show()
             }
-            if(password == usuari.password.toString()){
-
-                btnOk.setOnClickListener(
-                    if (username == usuari.username && password == usuari.password){
-                        //event del botó, comprovar i si és correcte obrir segona activity
-                    } else {
-                        // Les credencials no són correctes, pots mostrar un missatge d'error o fer alguna altra acció aquí
-                        Toast.makeText(this, "Credencials incorrectes", Toast.LENGTH_SHORT).show()
-                    }
-                )
-
-
-
-
-
-            }
-
-        private fun getUsuaris(): Any {
-            /*return mutableListOf(Usuari("alex", "xela", "Alex Saborit"),
-                                Usuari("admin", "nimda", "Administrador"))*/
-            return Usuari("cep", "informatica","Alex Saborit Bolea")
         }
     }
+    private fun getUsuaris(): Any
+    {
+        /*return mutableListOf(Usuari("alex", "xela", "Alex Saborit"),
+                            Usuari("admin", "nimda", "Administrador"))*/
+        return Usuari("cep", "informatica","Alex Saborit Bolea")
+    }
+}
