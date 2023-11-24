@@ -8,30 +8,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="introduisca iusarneim"
+        android:text="introduisca nom real"
         />
+
     <EditText
-        android:id="@+id/EdTxtUsername"
+        android:id="@+id/EdTxtNomSencer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="introduisca passuòrt"
-        />
-    <EditText
-        android:id="@+id/EdTxtPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textWebPassword"
         />
     <Button
-        android:id="@+id/BtnLogin"
+        android:id="@+id/BtnComprovar"
+        android:text="Comrpovar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
         />
+
 
 
 </LinearLayout>

@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "asb.m08.m08_uf1_14_login"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "asb.m08.m08_uf1_14_login"
